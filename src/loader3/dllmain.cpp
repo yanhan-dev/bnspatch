@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include <delayimp.h>
 #pragma comment( lib, "delayimp.lib" )
 
@@ -10,11 +10,18 @@ static inline volatile auto g_pfnSHCreateProcessAsUserW = &SHCreateProcessAsUser
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
-  AllocConsole();
-  std::cout << "DLL注入成功\n";
-
   switch (ul_reason_for_call) {
   case DLL_PROCESS_ATTACH: {
+
+    AllocConsole();
+
+    FILE* fDummy;
+    freopen_s(&fDummy, "CONIN$", "r", stdin);
+    freopen_s(&fDummy, "CONOUT$", "w", stderr);
+    freopen_s(&fDummy, "CONOUT$", "w", stdout);
+
+    std::cout << "DLL注入成功\n";
+
     NtCurrentPeb()->BeingDebugged = FALSE;
     wil::unique_handle tokenHandle;
     THROW_IF_WIN32_BOOL_FALSE(OpenProcessToken(NtCurrentProcess(), TOKEN_WRITE, &tokenHandle));
