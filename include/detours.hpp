@@ -1,7 +1,7 @@
 #pragma once
 
 #include <type_traits>
-#include <detours/detours.h>
+#include <detours.h>
 #include <wil/resource.h>
 #include <wil/result.h>
 
