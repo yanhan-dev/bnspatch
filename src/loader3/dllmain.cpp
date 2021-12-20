@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include <delayimp.h>
 #pragma comment( lib, "delayimp.lib" )
 
@@ -20,7 +20,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
     freopen_s(&fDummy, "CONOUT$", "w", stderr);
     freopen_s(&fDummy, "CONOUT$", "w", stdout);
 
-    std::cout << "DLL注入成功\n";
+    std::cout << "DLL Inject Success!\n";
 
     NtCurrentPeb()->BeingDebugged = FALSE;
     wil::unique_handle tokenHandle;
